@@ -1,0 +1,27 @@
+# Green PC Monitor configuration
+# Lines beginning with # are comments.
+
+# Electricity price in Bangladeshi Taka per kWh
+electricity_rate=10.40
+
+# Estimated kg CO2 produced per kWh
+# Change this value to match the emission factor you choose for your study.
+emission_factor=0.5
+
+# Approximate estimated PC power at idle, in watts.
+idle_power=45
+
+# Estimated additional power at 100% CPU usage, in watts.
+cpu_max_additional=70
+
+# Estimated additional power at 100% RAM usage, in watts.
+ram_max_additional=15
+
+# CPU usage below this value is considered low/idle.
+idle_cpu_threshold=10
+
+# Number of minutes of low CPU activity before an idle warning.
+idle_minutes=5
+
+# Refresh interval in milliseconds.
+refresh_ms=1000
