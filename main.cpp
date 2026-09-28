@@ -254,7 +254,7 @@ int main()
         clearScreen();
 
         cout << "============================================================\n";
-        cout << "                  GREEN PC MONITOR v1.0\n";
+        cout << "          GREEN PC MONITOR v1.0 by Cyber Minds\n";
         cout << "============================================================\n\n";
 
         printBar("CPU", cpu);
