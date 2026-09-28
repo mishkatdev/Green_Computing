@@ -15,12 +15,12 @@
 using namespace std;
 
 struct Config {
-    double electricityRate = 10.40;       // Tk per kWh
+    double electricityRate = 10.40;      
     double emissionFactor = 0.5;        // kg CO2 per kWh
-    double idlePower = 45.0;            // estimated whole-PC idle power
-    double cpuMaxAdditional = 70.0;      // estimated extra watts at 100% CPU
-    double ramMaxAdditional = 15.0;      // estimated extra watts at 100% RAM
-    double idleCpuThreshold = 10.0;      // percent
+    double idlePower = 45.0;            
+    double cpuMaxAdditional = 70.0;      
+    double ramMaxAdditional = 15.0;      
+    double idleCpuThreshold = 10.0;      
     int idleMinutes = 5;
     int refreshMs = 1000;
 };
