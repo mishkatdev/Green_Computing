@@ -85,4 +85,4 @@ The file stores timestamped monitoring samples that can later be analyzed in Exc
 
 ## Green computing concept
 
-The project demonstrates how real-time computer resource information can be used to estimate energy consumption and provide energy-awareness recommendations.
+The project demonstrates how real-time computer resource information can be used to estimate energy consumption and provide energy-awareness recommendations..
