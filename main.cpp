@@ -14,6 +14,17 @@
 
 using namespace std;
 
+
+void setColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+void resetColor()
+{
+    setColor(7); // Default white
+}
+
 struct Config {
     double electricityRate = 10.40;      
     double emissionFactor = 0.5;        // kg CO2 per kWh
@@ -253,80 +264,134 @@ int main()
 
         clearScreen();
 
-        cout << "============================================================\n";
-        cout << "          GREEN PC MONITOR v1.0 by Cyber Minds\n";
-        cout << "============================================================\n\n";
+       // ==================== DASHBOARD ====================
 
-        printBar("CPU", cpu);
-        printBar("RAM", ram);
+setColor(11); // Cyan
+cout << "============================================================\n";
+cout << "          GREEN PC MONITOR v1.0 by Cyber Minds\n";
+cout << "============================================================\n\n";
 
-        cout << "\n------------------------------------------------------------\n";
-        cout << " SYSTEM\n";
-        cout << "------------------------------------------------------------\n";
+resetColor();
 
-        cout << left << setw(24) << "Uptime"
-             << ": " << formatUptime(uptimeMs) << "\n";
+printBar("CPU", cpu);
+printBar("RAM", ram);
 
-        cout << left << setw(24) << "Running Processes"
-             << ": " << processCount << "\n";
+setColor(11);
+cout << "\n------------------------------------------------------------\n";
+cout << " SYSTEM\n";
+cout << "------------------------------------------------------------\n";
+resetColor();
 
-        cout << "\n------------------------------------------------------------\n";
-        cout << " ENERGY ESTIMATION\n";
-        cout << "------------------------------------------------------------\n";
+cout << left << setw(24) << "Uptime"
+     << ": " << formatUptime(uptimeMs) << "\n";
 
-        cout << fixed << setprecision(2);
+cout << left << setw(24) << "Running Processes"
+     << ": " << processCount << "\n";
 
-        cout << left << setw(24) << "Estimated Power"
-             << ": " << power << " W\n";
 
-        cout << left << setw(24) << "Session Energy"
-             << ": " << sessionEnergy << " kWh\n";
+setColor(11);
+cout << "\n------------------------------------------------------------\n";
+cout << " ENERGY ESTIMATION\n";
+cout << "------------------------------------------------------------\n";
+resetColor();
 
-        cout << left << setw(24) << "Estimated Cost"
-             << ": Tk " << cost << "\n";
+cout << fixed << setprecision(2);
 
-        cout << left << setw(24) << "Estimated CO2"
-             << ": " << co2 << " kg\n";
+cout << left << setw(24) << "Estimated Power"
+     << ": ";
 
-        cout << "\n------------------------------------------------------------\n";
-        cout << " GREEN STATUS\n";
-        cout << "------------------------------------------------------------\n";
+setColor(14); // Yellow
+cout << power << " W\n";
+resetColor();
 
-        cout << left << setw(24) << "Green Score"
-             << ": " << greenScore << "/100\n";
+cout << left << setw(24) << "Session Energy"
+     << ": ";
 
-        if (idleCounter >= idleLimitSamples)
-        {
-            cout << "Status              : IDLE\n";
-            cout << "Recommendation      : PC has been idle for about "
-                 << cfg.idleMinutes << " minutes.\n";
-            cout << "                      Consider sleep mode when appropriate.\n";
-        }
-        else if (cpu > 80.0)
-        {
-            cout << "Status              : HIGH CPU ACTIVITY\n";
-            cout << "Recommendation      : Check high-CPU applications if this\n";
-            cout << "                      workload is not intentional.\n";
-        }
-        else if (ram > 85.0)
-        {
-            cout << "Status              : HIGH MEMORY USAGE\n";
-            cout << "Recommendation      : Close unnecessary applications/tabs.\n";
-        }
-        else
-        {
-            cout << "Status              : NORMAL\n";
-            cout << "Recommendation      : Continue using power-saving settings.\n";
-        }
+setColor(14); // Yellow
+cout << sessionEnergy << " kWh\n";
+resetColor();
 
-        cout << "\n------------------------------------------------------------\n";
-        cout << " Settings: " << cfg.electricityRate << " Tk/kWh | "
-             << cfg.emissionFactor << " kg CO2/kWh | "
-             << cfg.refreshMs << " ms refresh\n";
+cout << left << setw(24) << "Estimated Cost"
+     << ": ";
 
-        cout << " History: history.csv\n";
-        cout << " Press Ctrl+C to exit.\n";
-        cout << "============================================================\n";
+setColor(14); // Yellow
+cout << "Tk " << cost << "\n";
+resetColor();
+
+cout << left << setw(24) << "Estimated CO2"
+     << ": ";
+
+setColor(12); // Red
+cout << co2 << " kg\n";
+resetColor();
+
+
+setColor(11);
+cout << "\n------------------------------------------------------------\n";
+cout << " GREEN STATUS\n";
+cout << "------------------------------------------------------------\n";
+resetColor();
+
+cout << left << setw(24) << "Green Score"
+     << ": ";
+
+setColor(10); // Green
+cout << greenScore << "/100\n";
+resetColor();
+
+
+if (idleCounter >= idleLimitSamples)
+{
+    setColor(14); // Yellow
+    cout << "Status              : IDLE\n";
+    resetColor();
+
+    cout << "Recommendation      : PC has been idle for about "
+         << cfg.idleMinutes << " minutes.\n";
+
+    cout << "                      Consider sleep mode when appropriate.\n";
+}
+else if (cpu > 80.0)
+{
+    setColor(12); // Red
+    cout << "Status              : HIGH CPU ACTIVITY\n";
+    resetColor();
+
+    cout << "Recommendation      : Check high-CPU applications if this\n";
+    cout << "                      workload is not intentional.\n";
+}
+else if (ram > 85.0)
+{
+    setColor(12); // Red
+    cout << "Status              : HIGH MEMORY USAGE\n";
+    resetColor();
+
+    cout << "Recommendation      : Close unnecessary applications/tabs.\n";
+}
+else
+{
+    setColor(10); // Green
+    cout << "Status              : NORMAL\n";
+    resetColor();
+
+    cout << "Recommendation      : Continue using power-saving settings.\n";
+}
+
+
+setColor(11);
+cout << "\n------------------------------------------------------------\n";
+resetColor();
+
+cout << " Settings: " << cfg.electricityRate << " Tk/kWh | "
+     << cfg.emissionFactor << " kg CO2/kWh | "
+     << cfg.refreshMs << " ms refresh\n";
+
+cout << " History: history.csv\n";
+cout << " Press Ctrl+C to exit.\n";
+
+setColor(11);
+cout << "============================================================\n";
+resetColor();
 
         // Save one sample each refresh.
         appendHistory(cpu, ram, power, sessionEnergy, cost, co2);
